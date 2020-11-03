@@ -19,6 +19,17 @@ public class UserService {
         if (users.containsKey(userDto.getUserName())) {
             throw new UserAlreadyExistException("用户已存在");
         }
+        userDto.setId(users.size() + 1);
         users.put(userDto.getUserName(), userDto);
+    }
+
+    public UserDto login(String name, String password) {
+        if(!users.containsKey(name)) {
+            return null;
+        }
+        if (!users.get(name).getPassword().equals(password)) {
+            return null;
+        }
+        return users.get(name);
     }
 }
