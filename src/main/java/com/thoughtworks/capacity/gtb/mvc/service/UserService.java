@@ -1,7 +1,9 @@
 package com.thoughtworks.capacity.gtb.mvc.service;
 
 import com.thoughtworks.capacity.gtb.mvc.dto.UserDto;
+import com.thoughtworks.capacity.gtb.mvc.exception.InvalidPasswordException;
 import com.thoughtworks.capacity.gtb.mvc.exception.UserAlreadyExistException;
+import com.thoughtworks.capacity.gtb.mvc.exception.UserNotExistException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,10 +27,10 @@ public class UserService {
 
     public UserDto login(String name, String password) {
         if(!users.containsKey(name)) {
-            return null;
+            throw new UserNotExistException("用户不存在");
         }
         if (!users.get(name).getPassword().equals(password)) {
-            return null;
+            throw new InvalidPasswordException("密码错误");
         }
         return users.get(name);
     }
