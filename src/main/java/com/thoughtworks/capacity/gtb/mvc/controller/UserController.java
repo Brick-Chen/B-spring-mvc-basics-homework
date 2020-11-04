@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestParam("username") @Pattern(regexp = "[0-9A-Za-z_]{3,10}") String username, @RequestParam("password") @Size(min = 5, max = 12) String password) {
+    public ResponseEntity<UserDto> login(@RequestParam("username") @Pattern(regexp = "[0-9A-Za-z_]{3,10}", message = "用户名不合法") String username, @RequestParam("password") @Size(min = 5, max = 12, message = "密码不合法") String password) {
         return ResponseEntity.ok(userService.login(username, password));
     }
 }

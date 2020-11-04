@@ -27,10 +27,10 @@ public class UserService {
 
     public UserDto login(String name, String password) {
         if(!users.containsKey(name)) {
-            throw new UserNotExistException("用户不存在");
+            throw new UserNotExistException("用户名或密码错误");
         }
         if (!users.get(name).getPassword().equals(password)) {
-            throw new InvalidPasswordException("密码错误");
+            throw new InvalidPasswordException("用户名或密码错误");
         }
         return users.get(name);
     }
